@@ -6,6 +6,7 @@ const {
   userValidationSchema,
   loginUserValidationSchema,
 } = require('../../yupValidation/yupUserValidation');
+
 // eslint-disable-next-line consistent-return
 module.exports.login = async (req, res, next) => {
   const userCredentials = req.body;
@@ -36,13 +37,15 @@ module.exports.login = async (req, res, next) => {
       return res.status(200).json({ message: 'User Is Ban From Our Service' });
     }
     // making payload for JWT
-    const { _id: id, fullName: name, email: userEmail, role } = singUser;
+    const { _id: id, fullName: name, email: userEmail, role, ban } = singUser;
     const payload = {
       id,
       name,
       userEmail,
       role,
+      ban,
     };
+    console.log(singUser);
     // Create Jwt Token
     const token = await jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: '1day',
@@ -85,12 +88,14 @@ module.exports.register = async (req, res, next) => {
     });
 
     // making payload for user Jwt
-    const { _id: id, fullName: name, email: userEmail, ban } = insertedUser;
+    const { _id: id, fullName: name, email: userEmail, ban, role } = insertedUser;
+
     const payload = {
       id,
       name,
       userEmail,
       ban,
+      role,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: '1day',

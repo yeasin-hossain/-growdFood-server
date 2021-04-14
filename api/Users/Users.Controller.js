@@ -1,3 +1,3 @@
-module.exports.getAllProducts = async (req, res) => {
-  res.send('Hello');
+module.exports.getAllUsers = async (req, res) => {
+  res.send(req.currentUser);
 };
