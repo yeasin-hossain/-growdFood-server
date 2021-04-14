@@ -36,16 +36,17 @@ module.exports.login = async (req, res, next) => {
     if (singUser.ban) {
       return res.status(200).json({ message: 'User Is Ban From Our Service' });
     }
+
     // making payload for JWT
-    const { _id: id, fullName: name, email: userEmail, role, ban } = singUser;
+    const { _id: id, fullName: FullName, email: Email, role, ban } = singUser;
     const payload = {
       id,
-      name,
-      userEmail,
+      FullName,
+      Email,
       role,
       ban,
     };
-    console.log(singUser);
+
     // Create Jwt Token
     const token = await jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: '1day',
