@@ -1,6 +1,6 @@
 ### Api Endpoint and request configuration
 
-    **all route are secure, have to provide Authorization token**
+**all route are secure, have to provide Authorization token**
 
     https://phassignment11.herokuapp.com/auth
 
