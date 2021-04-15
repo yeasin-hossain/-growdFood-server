@@ -8,7 +8,7 @@ module.exports.getAllProducts = async (req, res, next) => {
     if (!products) {
       return res.status(404).json({ message: 'No Product Available' });
     }
-    res.status(200).json({ products });
+    res.status(200).json(products);
   } catch (err) {
     next(err);
   }

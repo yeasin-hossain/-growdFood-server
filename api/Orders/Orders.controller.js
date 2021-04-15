@@ -66,7 +66,7 @@ module.exports.getAllOrders = async (req, res, next) => {
     if (!orders) {
       return res.status(404).json({ message: 'No Product Available' });
     }
-    res.status(200).json({ orders });
+    res.status(200).json(orders);
   } catch (err) {
     next(err);
   }
