@@ -38,10 +38,10 @@ module.exports.login = async (req, res, next) => {
     }
 
     // making payload for JWT
-    const { _id: id, fullName: FullName, email: Email, role, ban } = singUser;
+    const { _id: id, fullName: name, email: Email, role, ban } = singUser;
     const payload = {
       id,
-      FullName,
+      name,
       Email,
       role,
       ban,
@@ -69,13 +69,13 @@ module.exports.register = async (req, res, next) => {
     });
 
     if (!isValid) {
-      return res.status(501).json({ message: 'Validation Error' });
+      return res.status(200).json({ message: 'Validation Error' });
     }
 
     // Check user already exist or not
     const existingUser = await Users.findOne({ email });
     if (existingUser) {
-      return res.status(501).json({ message: 'User Already Exist' });
+      return res.status(200).json({ message: 'User Already Exist' });
     }
 
     // Making hashed password for security

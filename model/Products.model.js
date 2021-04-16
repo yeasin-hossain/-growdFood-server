@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
 
 const { Schema } = mongoose;
 
@@ -34,7 +33,7 @@ const Product = new Schema({
   createdAt: {
     type: Number,
     required: true,
-    default: moment().unix(),
+    default: Date.now,
   },
 });
 

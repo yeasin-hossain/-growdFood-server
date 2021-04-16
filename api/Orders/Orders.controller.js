@@ -20,6 +20,7 @@ module.exports.saveOrder = async (req, res, next) => {
       }
     }
     const saveOrder = await Orders.create(product);
+
     if (!saveOrder) {
       return res.status(200).json({ message: 'Sorry Something Wants Wrong, Try Again' });
     }
@@ -54,6 +55,20 @@ module.exports.orderDelete = async (req, res, next) => {
       return res.status(200).json({ message: 'Sorry No Order Found' });
     }
     res.status(200).json(deletedOrder);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// eslint-disable-next-line consistent-return
+module.exports.orderByUserId = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const userOrders = await Orders.find({ userId }).sort({ createdAt: -1 });
+    if (!userOrders) {
+      return res.status(200).json({ message: 'Sorry No Order Found' });
+    }
+    res.status(200).json(userOrders);
   } catch (err) {
     next(err);
   }

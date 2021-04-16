@@ -65,6 +65,21 @@ module.exports.productDelete = async (req, res, next) => {
 };
 
 // eslint-disable-next-line consistent-return
+module.exports.singleProduct = async (req, res, next) => {
+  const { productId } = req.params;
+  try {
+    const product = await Products.findById(productId);
+    if (!product) {
+      return res.status(200).json({ message: 'Sorry No Product Found' });
+    }
+
+    res.status(200).json(product);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// eslint-disable-next-line consistent-return
 module.exports.updateStock = async (req, res, next) => {
   const { productId } = req.params;
   try {

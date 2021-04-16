@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
 
 const { Schema } = mongoose;
 
 const Order = new Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
   userEmail: {
+    type: String,
+    required: true,
+  },
+  address: {
     type: String,
     required: true,
   },
@@ -27,6 +34,14 @@ const Order = new Schema({
       required: true,
     },
   },
+  cardId: {
+    type: String,
+    required: true,
+  },
+  cardType: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ['pending', 'cancel', 'accepted', 'delivered'],
@@ -36,7 +51,7 @@ const Order = new Schema({
   createdAt: {
     type: Number,
     required: true,
-    default: moment().unix(),
+    default: Date.now,
   },
 });
 
