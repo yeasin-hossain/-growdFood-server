@@ -31,9 +31,9 @@ const Product = new Schema({
     required: true,
   },
   createdAt: {
-    type: Number,
+    type: Date,
     required: true,
-    default: Date.now,
+    default: new Date(),
   },
 });
 

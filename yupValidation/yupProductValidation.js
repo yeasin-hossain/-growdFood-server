@@ -9,4 +9,5 @@ module.exports.productValidationSchema = yup.object().shape({
   price: yup.number().required(errorMsg.requiredFiled),
   type: yup.string().trim().min(2).required(errorMsg.requiredFiled),
   description: yup.string().trim().min(2).required(errorMsg.requiredFiled),
+  imageUrl: yup.string().trim().min(2).required(errorMsg.requiredFiled),
 });

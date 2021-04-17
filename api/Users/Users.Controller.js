@@ -3,7 +3,6 @@ const Users = require('../../model/User.model');
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await Users.find({});
-    console.log(req.currentUser);
     if (users) {
       res.status(200).json(users);
     } else {
@@ -38,6 +37,7 @@ module.exports.singleUser = async (req, res, next) => {
 module.exports.updateRoleOrBan = async (req, res, next) => {
   const { type, action } = req.body;
   const { userID } = req.params;
+  console.log(req.body);
   try {
     if (type === 'role') {
       const changeRole = await Users.findByIdAndUpdate(userID, { role: action });
@@ -53,19 +53,19 @@ module.exports.updateRoleOrBan = async (req, res, next) => {
           role,
         };
         res.status(200).json(payload);
-      } else if (type === 'ban') {
-        const banUser = await Users.findByIdAndUpdate(userID, { ban: action });
-        const { _id: id, fullName: name, email: userEmail, ban, role } = banUser;
-
-        const payload = {
-          id,
-          name,
-          userEmail,
-          ban,
-          role,
-        };
-        res.status(200).json(payload);
       }
+    } else if (type === 'ban') {
+      const banUser = await Users.findByIdAndUpdate(userID, { ban: action });
+      const { _id: id, fullName: name, email: userEmail, ban, role } = banUser;
+
+      const payload = {
+        id,
+        name,
+        userEmail,
+        ban,
+        role,
+      };
+      res.status(200).json(payload);
     }
   } catch (err) {
     next(err);

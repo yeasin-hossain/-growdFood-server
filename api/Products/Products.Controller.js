@@ -4,7 +4,7 @@ const { productValidationSchema } = require('../../yupValidation/yupProductValid
 // eslint-disable-next-line consistent-return
 module.exports.getAllProducts = async (req, res, next) => {
   try {
-    const products = await Products.find({});
+    const products = await Products.find({}).sort({ createdAt: -1 });
     if (!products) {
       return res.status(404).json({ message: 'No Product Available' });
     }

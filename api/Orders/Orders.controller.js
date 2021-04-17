@@ -34,6 +34,7 @@ module.exports.saveOrder = async (req, res, next) => {
 module.exports.changeStatus = async (req, res, next) => {
   const { orderId } = req.params;
   const { status } = req.body;
+  console.log(status);
   try {
     const updateStatus = await Orders.findByIdAndUpdate(orderId, { status });
 

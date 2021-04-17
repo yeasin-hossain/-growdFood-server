@@ -21,7 +21,7 @@ module.exports.saveReview = async (req, res, next) => {
 // eslint-disable-next-line consistent-return
 module.exports.getAllReviews = async (req, res, next) => {
   try {
-    const reviews = await Reviews.find({});
+    const reviews = await Reviews.find({}).sort({ createdAt: -1 });
     if (!reviews) {
       return res.status(404).json({ message: 'No Reviews Available' });
     }
