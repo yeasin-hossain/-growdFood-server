@@ -18,6 +18,19 @@ module.exports.productType = async (req, res, next) => {
 };
 
 // eslint-disable-next-line consistent-return
+module.exports.getAllProducts = async (req, res, next) => {
+  try {
+    const products = await Products.find({}).sort({ createdAt: -1 });
+    if (!products) {
+      return res.status(404).json({ message: 'No Product Available' });
+    }
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// eslint-disable-next-line consistent-return
 module.exports.getAllReviews = async (req, res, next) => {
   try {
     const reviews = await Reviews.find({});
