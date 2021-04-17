@@ -5,7 +5,7 @@ const Reviews = require('../../model/Review.model');
 module.exports.productType = async (req, res, next) => {
   const { type } = req.params;
   try {
-    const products = await Products.find({ type }).limit(5);
+    const products = await Products.find({ type }).limit(10);
     if (products.length === 0) {
       // Send Final Data
       return res.status(200).json({ message: 'Sorry No Product Found' });
