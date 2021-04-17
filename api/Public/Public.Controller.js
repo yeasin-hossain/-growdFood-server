@@ -1,3 +1,4 @@
+const Newsletter = require('../../model/NewsLetter');
 const Products = require('../../model/Products.model');
 const Reviews = require('../../model/Review.model');
 
@@ -38,6 +39,16 @@ module.exports.getAllReviews = async (req, res, next) => {
       return res.status(404).json({ message: 'No Reviews Available' });
     }
     res.status(200).json(reviews);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// eslint-disable-next-line consistent-return
+module.exports.saveNewsLetter = async (req, res, next) => {
+  try {
+    const nLetter = await Newsletter.create(req.params);
+    res.status(200).json(nLetter);
   } catch (err) {
     next(err);
   }
