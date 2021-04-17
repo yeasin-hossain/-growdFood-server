@@ -38,11 +38,11 @@ module.exports.login = async (req, res, next) => {
     }
 
     // making payload for JWT
-    const { _id: id, fullName: name, email: Email, role, ban } = singUser;
+    const { _id: id, fullName: name, email: userEmail, role, ban } = singUser;
     const payload = {
       id,
       name,
-      Email,
+      userEmail,
       role,
       ban,
     };
