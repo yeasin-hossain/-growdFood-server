@@ -37,7 +37,6 @@ module.exports.singleUser = async (req, res, next) => {
 module.exports.updateRoleOrBan = async (req, res, next) => {
   const { type, action } = req.body;
   const { userID } = req.params;
-  console.log(req.body);
   try {
     if (type === 'role') {
       const changeRole = await Users.findByIdAndUpdate(userID, { role: action });
